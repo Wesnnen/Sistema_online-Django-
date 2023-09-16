@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Teste 3</h2>
+    <table>
+        <THead>
+            <TR>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th></th>
+            </TR>
+        </THead>
+        <tbody>
+            {% for  curso in lista %}
+                <tr>
+                <td>{{ curso.nome }}</td>
+                <td>{{ curso.valor }}</td>
+                </tr>
+            {% endfor %}
+         </tbody>        
+    </table>
+</body>
+</html>
