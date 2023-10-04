@@ -17,3 +17,19 @@ class Turma(models.Model):
 
     def __str__(self):
         return f"{self.curso.nome} - {self.dataInicio} - {self.dataTermino}"
+    
+
+class Professor(models.Model):
+    Nome= models.CharField(max_length=150, null=False)
+    telefone = models.DecimalField(max_digits=13, decimal_places=0)
+
+    def __str__(self):
+        return F"{self.nome} - {self.telefone}"
+
+class Aluno(models.Model):
+    Nome= models.CharField(max_length=150, null=False)
+    telefone = models.DecimalField(max_digits=13, decimal_places=0)
+    email = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return F"{self.nome} - {self.telefone} - {self.email}"

@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incluir Cursos</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap5 %}
 
     <H1>Página de Cursos</H1>
     <form action="" method="post"> <!-- sempre colocar o token para permitir o acesso ao banco-->
-        {{ form.as_p }}
+        {% bootstrap_form form %}
         {% csrf_token %} 
-        <input type="submit" value="Gravar"/>
+        <input type="submit" value="Gravar" class="btn btn-primary"/>
     </form>
 
-    
-</body>
-</html>
+{% endblock %}

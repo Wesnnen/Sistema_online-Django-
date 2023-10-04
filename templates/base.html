@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema acadêmico online</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+            {% for m in messages %}
+                <div class="alert alert-warning" role="alert">
+                    {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <nav class="navbar navbar-expand-lg" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}">Sistema Online</a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#menu"
+                        aria-controls="menu" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span>Menu</span>
+                </button>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarCursos' %}">Cursos</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'listarTurmas' %}">Turmas</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="#">Alunos</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="#">Professores</a>
+                        </li>
+                        <li class="list-item">
+                            <a class="nav-link" href="{% url 'sair' %}">Sair</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            {% block content %}
+            {% endblock %}
+        
+            {% else %}
+            
+            <a href="{% url 'login' %}"> Clique aqui para logar</a>
+            <a href="{% url 'registro' %}"> Clique aqui para criar uma nova conta </a>
+
+            {% endif %}
+        
+      
+      
+    </div>
+    
+</body>
+    {% bootstrap_javascript %}
+
+</html>

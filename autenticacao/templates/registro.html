@@ -1,0 +1,15 @@
+{% extends 'base_autenticacao.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+
+<h2>Cadastro</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form usuario_form %}
+    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+
+</form>
+
+{% endblock %}

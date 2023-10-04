@@ -1,15 +1,17 @@
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from cadastro.forms import CursosForm
 
-from cadastro.models import Curso
+from cadastro.models import Curso, Turma
 
 # Create your views here.
 
 
 def index(request):
-    return HttpResponse("Olá, Mundo! Agora estou na web")
+    #return HttpResponse("Olá, Mundo! Agora estou na web")
+    return render(request, "inicio.html")
 
 def teste(request):
     return HttpResponse("teste")
@@ -56,8 +58,11 @@ def excluirCurso(request,id):
     try:
         curso.delete()
     except:
-        pass
+        messages.error(request, "Não e possivel excluir.")
     return redirect('listarCursos')
 
+def listarTurmas(request):
+    turmas = Turma.objects.all()
+    return render(request, 'listar_turmas.html', {'turmas' : turmas})
 
 
