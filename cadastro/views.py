@@ -2,9 +2,9 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from cadastro.forms import CursosForm
+from cadastro.forms import AlunoForm, CursosForm, ProfessorForm
 
-from cadastro.models import Curso, Turma
+from cadastro.models import Aluno, Curso, Professor, Turma
 
 # Create your views here.
 
@@ -65,4 +65,92 @@ def listarTurmas(request):
     turmas = Turma.objects.all()
     return render(request, 'listar_turmas.html', {'turmas' : turmas})
 
+
+
+#------------------------------------------------------------------------
+#Professor
+def listarProfessor(request):
+    professor = Professor.objects.all().order_by('Nome')
+    return render(request, 'listar_professores.html', {'professor' : professor})
+
+def incluirProfessor(request):
+    if request.method == 'POST':
+        form = ProfessorForm(request.POST) # linha que faz a save
+        if form.is_valid():
+            try:
+                form.save() #linha que salva no db
+                model = form.instance
+                return redirect('listarProfessor')
+            except:
+                pass
+    else:
+        form = ProfessorForm()
+    return render(request,"incluir_professor.html", {'form': form })
+
+def editarProfessor(request, id):
+    professor = Professor.objects.get(id = id)
+    form = ProfessorForm(instance=professor)
+    
+    if request.method == "POST":
+        form = ProfessorForm(request.POST, instance=professor) # linha que faz a edição
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('listarProfessor')
+            except:
+                pass
+
+    return render(request, "incluir_professor.html", {'form' : form })
+
+
+def excluirProfessor(request, id):
+    professor = Professor.objects.get(id = id)
+    try:
+        professor.delete()
+    except:
+        messages.error(request, "Não e possivel excluir.")
+    return redirect('listarProfessor')
+
+#_______________________________________________________________________________
+#Aluno
+def listarAluno(request):
+    aluno = Aluno.objects.all()
+    return render(request, 'listar_alunos.html', {'aluno' : aluno})
+
+def incluirAluno(request):
+    if request.method == 'POST':
+        form = AlunoForm(request.POST) # linha que faz o save
+        if form.is_valid():
+            try:
+                form.save() #linha que salva no db
+                model = form.instance
+                return redirect('listarAluno')
+            except:
+                pass
+    else:
+        form = AlunoForm()
+    return render(request,"incluir_aluno.html", {'form': form })
+
+def editarAluno(request,id):
+    aluno = Aluno.objects.get(id = id)
+    form = AlunoForm(instance=aluno)
+    
+    if request.method == "POST":
+        form = AlunoForm(request.POST, instance=aluno) # linha que faz a edição
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('listarAluno')
+            except:
+                pass
+
+    return render(request, "incluir_aluno.html", {'form' : form })
+
+def excluirAluno(request,id):
+    aluno = Aluno.objects.get(id = id)
+    try:
+        aluno.delete()
+    except:
+        messages.error(request, "Não e possivel excluir.")
+    return redirect('listarAluno')
 

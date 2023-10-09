@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load bootstrap5 %}
 
-{% endblock%}
+    <H1>Página de Cursos</H1>
+    <form action="" method="post"> <!-- sempre colocar o token para permitir o acesso ao banco-->
+        {% bootstrap_form form %}
+        {% csrf_token %} 
+        <input type="submit" value="Gravar" class="btn btn-primary"/>
+    </form>
+
+{% endblock %}

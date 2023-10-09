@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<a href="{% url 'incluirCurso' %}" class="btn btn-primary">Cadastrar novo curso</a>
+<a href="{% url 'incluirProfessor' %}" class="btn btn-primary">Cadastrar novo Professor</a>
 <table class="table table-striped">
     <THead>
         <TR>
+           
             <th>Nome</th>
-            <th>Valor</th>
+            <th>Telefone</th>
             <th>Ações</th>
         </TR>
     </THead>
     <tbody>
-        {% for curso in lista %}
-            <tr>
-            <td>{{ curso.nome }}</td>
-            <td>{{ curso.valor }}</td>
-            <td><a href="/cadastro/editar_curso/{{curso.codigo}}">Alterar</a> 
+        {% for p in professor %}
+            <tr> 
+            <td>{{ p.Nome }}</td>
+            <td>{{ p.telefone }}</td>
+            <td><a href="/cadastro/editar_professor/{{p.id}}">Alterar</a> 
                 <a href="javascript:void(0)"
-                onclick="abrirTela('/cadastro/excluir_curso/{{curso.codigo}}')">Excluir</a>
+                onclick="abrirTela('/cadastro/excluir_professor/{{p.id}}')">Excluir</a>
             </td>
             </tr>
         {% endfor %}
@@ -70,5 +71,3 @@
 </script>
 
 {% endblock %}
-
-{% endblock%}

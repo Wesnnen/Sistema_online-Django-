@@ -24,7 +24,7 @@ class Professor(models.Model):
     telefone = models.DecimalField(max_digits=13, decimal_places=0)
 
     def __str__(self):
-        return F"{self.nome} - {self.telefone}"
+        return F"{self.Nome} - {self.telefone}"
 
 class Aluno(models.Model):
     Nome= models.CharField(max_length=150, null=False)
@@ -32,4 +32,4 @@ class Aluno(models.Model):
     email = models.CharField(max_length=200, null=False)
 
     def __str__(self):
-        return F"{self.nome} - {self.telefone} - {self.email}"
+        return F"{self.Nome} - {self.telefone} - {self.email}"
